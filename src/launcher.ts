@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { apps } from './apps';
+import { getApps } from './apps';
 import { ActionResult, SuperAction, SuperContext } from '@coffic/buddy-it';
 
 /**
@@ -17,6 +17,9 @@ export async function searchApps(args: SuperContext): Promise<SuperAction[]> {
     const searchKeyword = keyword.toLowerCase().trim();
     const matchedApps: SuperAction[] = [];
 
+    // 动态获取系统应用列表
+    const apps = await getApps();
+
     // 搜索匹配的应用程序
     for (const app of apps) {
         const isMatch = app.keywords.some(k =>
@@ -31,6 +34,11 @@ export async function searchApps(args: SuperContext): Promise<SuperAction[]> {
             });
         }
     }
+
+    matchedApps.push({
+        id: 'total_count',
+        description: `共找到 ${matchedApps.length} 个应用`,
+    });
 
     return matchedApps;
 }
@@ -51,6 +59,9 @@ export async function launchApp(args: SuperContext): Promise<ActionResult> {
     }
 
     const appName = actionId.replace('launch_', '');
+
+    // 动态获取系统应用列表
+    const apps = await getApps();
     const app = apps.find(a => a.name === appName);
 
     if (!app) {
