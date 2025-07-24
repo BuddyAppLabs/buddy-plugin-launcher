@@ -35,11 +35,6 @@ export async function searchApps(args: SuperContext): Promise<SuperAction[]> {
         }
     }
 
-    matchedApps.push({
-        id: 'total_count',
-        description: `共找到 ${matchedApps.length} 个应用`,
-    });
-
     return matchedApps;
 }
 
