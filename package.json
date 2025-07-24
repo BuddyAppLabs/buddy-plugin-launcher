@@ -1,0 +1,38 @@
+{
+  "name": "@coffic/buddy-plugin-app-launcher",
+  "version": "1.0.0",
+  "description": "Buddy应用启动器插件",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "buddyPlugin": {
+    "id": "app-launcher-plugin"
+  },
+  "devDependencies": {
+    "@coffic/buddy-types": "*",
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "buddy",
+    "plugin",
+    "app",
+    "launcher",
+    "application",
+    "buddy-plugin"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Coffic",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "views"
+  ]
+}
